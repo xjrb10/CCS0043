@@ -1,3 +1,12 @@
+// CCS0043L source code Template for 3T AY 2022-2023
+/*
+    Progam:     Computation of Grades using Function
+    Programmer: BONCALES, Joen Ralph S.
+    Section:    BSCS-AN22
+    Start Date: June 2, 2023
+    End Date:   June 2, 2023
+*/
+
 (async () => {
     const amountAndWeights = {
         "Class Participation": {
