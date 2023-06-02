@@ -26,6 +26,7 @@
             outputIndex: 3
         },
     };
+
     function getGradeLetter(grade) {
         if (grade < 60) return "F";
         if (grade <= 69) return "D";
@@ -36,12 +37,9 @@
     }
 
     const isNode = typeof window === 'undefined';
-    let promptAsync;
 
-    if (isNode) {
-        const readline = require('readline');
-
-        promptAsync = async (question) => {
+    async function prompt(msg) {
+        async function promptAsync(question) {
             const rl = readline.createInterface({
                 input: process.stdin,
                 output: process.stdout
@@ -53,10 +51,8 @@
                     resolve(answer);
                 });
             });
-        }
-    }
-    async function prompt(msg){
-        return isNode ? await promptAsync(msg): prompt(msg);
+        };
+        return isNode ? await (promptAsync)(msg) : prompt(msg);
     }
 
     // main operations
@@ -86,9 +82,9 @@
     const columns = ["Name of Student", "Class Participation", "Summative Assessment", "Exam Grade", "Grade Score", "Letter Grade"];
     if (isNode) {
         // node.js
-        console.log(columns.join("\t"));
+        console.log(columns.join(" | "));
         for (const row of content) {
-            console.log(row.join("\t"));
+            console.log(`${row[0]}\t\t${row[1]}\t\t\t${row[2]}\t\t${row[3]}\t\t${row[4]}\t\t${row[5]}`);
         }
     } else {
         const table = document.createElement("table");
